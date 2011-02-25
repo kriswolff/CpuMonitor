@@ -1,0 +1,23 @@
+#!/sbin/sh
+#
+
+# This service is managed by smf(5).  Thus, this script provides
+# compatibility with previously documented init.d script behaviour.
+
+#FMRI=network/ldap/client:default
+
+case "$1" in
+'start')
+	cd /opt/CpuMonitor/deamon
+	./recLoad.sh &
+	;;
+
+'stop')
+	pkill -9 recLoad.sh
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <title>CPU @Gisela</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="author" content="kris">
+        <link rel="stylesheet" href="demo.css" type="text/css" media="screen" charset="utf-8">
+
+        <script src="jquery-1.5.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="raphael-min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="g.raphael-min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="g.bar-min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="g.line-min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            window.onload = function () {
+
+                var r = Raphael("holder");
+
+            var x = []; 
+            var y = [];
+            var y = $.getJSON("http://localhost/data.txt", function(data){
+                y = data["y"];
+            })
+                .success(function() {  })
+                .error(function() { alert("error"); })
+                .complete(function() {
+                    for (var i = 0; i < y[0].length; i++) {
+                        x[i] = i ;
+                    }
+                    draw(x,y);
+                });
+
+            var draw = function(x, y){
+                r.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
+                r.g.linechart(10, 10, 600, 200, x, y, {shade: true});
+            }
+                
+            };
+        </script>
+    </head>
+    <style>
+        .cpubox {
+            border: 1px solid black;
+        }
+    </style>
+    <body class="raphael" id="com.sinnerschrader.intern.cpuload">
+        <div id="holder"></div>
+        <p>
+            CPU load @Bruno
+        </p>
+    </body>
+</html>
